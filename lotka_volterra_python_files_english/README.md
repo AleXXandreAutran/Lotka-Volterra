@@ -13,17 +13,8 @@ These `.py` files were generated from `Lotka-Volterra.ipynb`.
 - `06_fbs_theta_comparison.py`: comparison of Forward--Backward Sweep relaxation parameters.
 - `07_report_figures_pretty.py`: final publication/report-ready figures.
 
-## Cleanup performed
-
-- Empty notebook cells were ignored.
-- Repeated plotting blocks from the last notebook cells were omitted.
-- Comparison scripts import the shared core from `optimal_control_core.py`, which avoids duplicating the same simulation and optimization functions.
-- File names are ordered and suitable for a GitHub repository.
-
 ## Main dependencies
 
 ```bash
 pip install numpy scipy pandas matplotlib
 ```
-
-Some scripts may require `ffmpeg` to save animations as MP4 files.
