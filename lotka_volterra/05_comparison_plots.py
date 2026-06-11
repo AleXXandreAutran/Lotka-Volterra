@@ -1,5 +1,3 @@
-# Generated from Lotka-Volterra.ipynb. Empty cells and repeated plotting blocks were omitted.
-
 import os
 import numpy as np
 import matplotlib.pyplot as plt
