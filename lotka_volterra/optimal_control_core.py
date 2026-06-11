@@ -1,5 +1,3 @@
-# Generated from Lotka-Volterra.ipynb. Empty cells and repeated plotting blocks were omitted.
-
 import time
 import numpy as np
 import pandas as pd
