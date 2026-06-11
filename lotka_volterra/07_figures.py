@@ -13,7 +13,7 @@ Typical use in your notebook/script, after computing `P` and `results`:
 or, if you want to run this file directly in an environment where `P` and
 `results` already exist:
 
-    exec(open("report_figures_pretty.py").read())
+    exec(open("figures.py").read())
 
 The script generates the four figures used in the report:
   1. final discrete cost comparison,
