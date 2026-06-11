@@ -29,6 +29,7 @@ lotka_volterra/
 ├── 04_run_baseline_comparison.py
 ├── 06_fbs_theta_comparison.py
 ├── 07_constant_control_regimes.py
+├── 08_nonconstant_stationary_profile.py
 └── optimal_control_core.py
 ```
 
@@ -136,11 +137,4 @@ The tested values are
 
 This experiment shows how relaxation affects the stability and convergence of the fixed-point iteration.
 
-## Notes
-
-The numerical comparison focuses on tabulated quantities rather than additional figures, since the figures reproduce the same information as the tables.
-
-The Poisson-type Lotka--Volterra discretization discussed in the manuscript is a structure-preserving time discretization for the reaction part. It is not included in the optimization benchmark, because a fully consistent comparison would require deriving and implementing the corresponding fully discrete adjoint.
-
-```
 ```
