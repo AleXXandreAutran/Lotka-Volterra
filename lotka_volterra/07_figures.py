@@ -1,8 +1,6 @@
 # Generated from Lotka-Volterra.ipynb. Empty cells and repeated plotting blocks were omitted.
 
 """
-Pretty figures for the numerical comparison section of the report.
-
 This file assumes that the optimization results have already been computed and
 are available through a Python variable named `results`. It also uses `P.Umax`
 when available. If `P` is not available, set UMAX manually below.
