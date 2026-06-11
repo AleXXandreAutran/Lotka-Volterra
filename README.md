@@ -13,8 +13,9 @@ The code includes:
 ## Requirements
 
 The scripts require Python 3 and the following packages:
+````
 
-```bash
+````bash
 pip install numpy scipy pandas matplotlib
 ````
 
@@ -136,5 +137,3 @@ The tested values are
 ```
 
 This experiment shows how relaxation affects the stability and convergence of the fixed-point iteration.
-
-```
