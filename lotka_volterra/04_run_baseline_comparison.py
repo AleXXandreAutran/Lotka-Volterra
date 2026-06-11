@@ -1,5 +1,3 @@
-# Generated from Lotka-Volterra.ipynb. Empty cells and repeated plotting blocks were omitted.
-
 from optimal_control_core import *
 
 # ============================================================
