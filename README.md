@@ -116,7 +116,7 @@ The cost parameters are
 \eta=0.8.
 ```
 
-All optimization methods are initialized with the same admissible control (u_2^{(0)}\equiv 0). The maximum number of iterations is set to 100.
+All optimization methods are initialized with the same admissible control $u_2^{(0)}\equiv 0$. The maximum number of iterations is set to 100.
 
 The benchmark reports the final discrete cost, the number of iterations, the CPU time, and the projected-gradient residual.
 
