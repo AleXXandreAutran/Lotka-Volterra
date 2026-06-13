@@ -1,6 +1,6 @@
-````markdown
-# Lotka--Volterra optimal control
 
+# Lotka--Volterra optimal control
+````markdown
 This repository contains the Python scripts used for the numerical experiments in the study of controlled Lotka--Volterra reaction--diffusion systems.
 
 The code includes:
@@ -9,9 +9,10 @@ The code includes:
 - two-dimensional reaction--diffusion simulations with Neumann and Dirichlet boundary conditions;
 - numerical experiments for constant control regimes;
 - benchmark comparisons between optimization methods for the optimal control problem.
+````
 
 ## Requirements
-
+````markdown
 The scripts require Python 3 and the following packages:
 ````
 
