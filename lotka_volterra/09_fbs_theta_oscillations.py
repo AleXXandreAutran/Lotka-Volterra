@@ -1,3 +1,41 @@
+from optimal_control_core import *
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+def run_fbs_with_iterates(theta, max_iter=80):
+    u = np.zeros((P.N, P.M))
+
+    rows = []
+    controls = [u.copy()]
+
+    for k in range(max_iter):
+        J, grad, v1, v2, p1, p2 = reduced_cost_and_gradient(P, u, return_state=True)
+
+        u_raw = (P.q / P.lam) * v2[:-1, :] * (P.eta + p2[1:, :])
+        u_new = project_control(theta * u_raw + (1.0 - theta) * u, P)
+
+        du = u_new - u
+
+        control_change_rms = np.linalg.norm(du.ravel()) / np.sqrt(du.size)
+        pg_res = projected_gradient_residual(P, u, grad)
+
+        rows.append({
+            "iteration": k,
+            "cost": J,
+            "control_change_rms": control_change_rms,
+            "pg_residual": pg_res,
+            "u_mean": np.mean(u),
+            "u_min": np.min(u),
+            "u_max": np.max(u),
+        })
+
+        u = u_new
+        controls.append(u.copy())
+
+    return pd.DataFrame(rows), np.stack(controls, axis=0)
+
 # ------------------------------------------------------------
 # Parameters
 # ------------------------------------------------------------
