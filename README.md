@@ -92,7 +92,7 @@ The tested problem is one-dimensional, with
 \Omega=(0,1), \qquad T=4.
 ```
 
-The space interval is discretized with (M=80) grid points and the time interval with (N=120) time steps. The model parameters are
+The space interval is discretized with $M=80$ grid points and the time interval with $N=120$ time steps. The model parameters are
 
 ```math
 m=1, \qquad r=1.2, \qquad \alpha=\beta=q=1,
