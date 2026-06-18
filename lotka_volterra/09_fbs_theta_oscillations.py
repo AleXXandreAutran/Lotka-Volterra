@@ -36,9 +36,7 @@ def run_fbs_with_iterates(theta, max_iter=80):
 
     return pd.DataFrame(rows), np.stack(controls, axis=0)
 
-# ------------------------------------------------------------
 # Parameters
-# ------------------------------------------------------------
 thetas = [1.0, 0.75, 0.5, 0.25, 0.1, 0.05]
 max_iter = 100
 
@@ -51,9 +49,7 @@ for theta in thetas:
     controls[theta] = Uhist
 
 
-# ------------------------------------------------------------
 # Plot settings
-# ------------------------------------------------------------
 plt.rcParams.update({
     "font.size": 11,
     "axes.titlesize": 12,
@@ -62,9 +58,7 @@ plt.rcParams.update({
 })
 
 
-# ------------------------------------------------------------
 # Single stretched figure with 3 panels
-# ------------------------------------------------------------
 fig, axes = plt.subplots(
     3, 1,
     figsize=(13, 12),
@@ -74,9 +68,7 @@ fig, axes = plt.subplots(
 xticks = np.arange(0, max_iter + 1, 20)
 
 
-# ------------------------------------------------------------
 # Panel 1: RMS control update
-# ------------------------------------------------------------
 ax = axes[0]
 
 for theta in thetas:
@@ -101,9 +93,7 @@ ax.grid(True, which="both", alpha=0.35)
 ax.legend(ncol=3)
 
 
-# ------------------------------------------------------------
 # Panel 2: reduced discrete cost
-# ------------------------------------------------------------
 ax = axes[1]
 
 for theta in thetas:
@@ -126,9 +116,7 @@ ax.grid(True, alpha=0.35)
 ax.legend(ncol=3)
 
 
-# ------------------------------------------------------------
 # Panel 3: mean control value
-# ------------------------------------------------------------
 ax = axes[2]
 
 for theta in thetas:
