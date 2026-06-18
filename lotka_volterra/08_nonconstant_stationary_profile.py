@@ -5,9 +5,8 @@ from scipy.optimize import least_squares
 from scipy.sparse import coo_matrix
 
 
-# ============================================================
+
 # Parameters
-# ============================================================
 
 m = 0.6
 r = 1.2
@@ -19,25 +18,22 @@ mu1 = 1e-3   # diffusion coefficient for predators V_1
 mu2 = 1e-3   # diffusion coefficient for prey V_2
 
 
-# ============================================================
+
 # Space discretization
-# ============================================================
 
 Nx = 120
 x = np.linspace(0.0, 1.0, Nx)
 h = x[1] - x[0]
 
 
-# ============================================================
+
 # Spatially heterogeneous stationary control U_2(x)
-# ============================================================
 
 U2 = 0.4 + 0.9 * np.exp(-((x - 0.5) ** 2) / (2 * 0.12 ** 2))
 
 
-# ============================================================
+
 # Neumann Laplacian in 1D
-# ============================================================
 
 def laplacian_neumann(w):
     lap = np.zeros_like(w)
@@ -51,9 +47,7 @@ def laplacian_neumann(w):
     return lap
 
 
-# ============================================================
 # Stationary residual
-# ============================================================
 # We solve:
 #
 # 0 = mu1 Delta V1 + V1(-m + alpha V2)
@@ -71,9 +65,7 @@ def stationary_residual(y):
     return np.concatenate([R1, R2])
 
 
-# ============================================================
 # Sparsity pattern for the nonlinear solver
-# ============================================================
 
 rows = []
 cols = []
@@ -103,9 +95,7 @@ jac_sparsity = coo_matrix(
 ).tocsr()
 
 
-# ============================================================
 # Initial guess
-# ============================================================
 
 V1_guess = 0.8 - 0.7 * np.exp(-((x - 0.5) ** 2) / (2 * 0.18 ** 2))
 V2_guess = 0.6 - 0.35 * np.exp(-((x - 0.5) ** 2) / (2 * 0.14 ** 2))
@@ -116,9 +106,8 @@ V2_guess = np.maximum(V2_guess, 0.05)
 y0 = np.concatenate([V1_guess, V2_guess])
 
 
-# ============================================================
+
 # Solve the nonlinear stationary system
-# ============================================================
 
 solution = least_squares(
     stationary_residual,
@@ -139,9 +128,7 @@ print("Infinity norm of the residual:")
 print(np.linalg.norm(stationary_residual(solution.x), ord=np.inf))
 
 
-# ============================================================
 # Plot
-# ============================================================
 
 fig, ax1 = plt.subplots(figsize=(8, 4.5))
 
