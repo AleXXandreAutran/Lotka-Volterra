@@ -1,8 +1,7 @@
 from optimal_control_core import *
 
-# ============================================================
+
 # 11. Run comparison
-# ============================================================
 
 def run_all_methods(P):
     results = []
@@ -22,9 +21,7 @@ def run_all_methods(P):
 results = run_all_methods(P)
 
 
-# ============================================================
 # 12. Numerical summary table
-# ============================================================
 
 def summarize_results(P, results):
     rows = []
@@ -65,9 +62,8 @@ print("\nSaved numerical summary to comparison_summary.csv")
 
 
 
-# ============================================================
+
 # 14. Extra diagnostic: constraint activity
-# ============================================================
 
 def activity_statistics(P, results):
     rows = []
@@ -98,9 +94,8 @@ activity.to_csv("activity_summary.csv", index=False)
 print("\nSaved activity summary to activity_summary.csv")
 
 
-# ============================================================
+
 # 15. Save full histories
-# ============================================================
 
 def save_histories(results):
     all_rows = []
