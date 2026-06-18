@@ -2,12 +2,9 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
 from optimal_control_core import *
 
-# ============================================================
 # Run comparison with several FBS relaxation parameters
-# ============================================================
 
 def run_all_methods_with_fbs_thetas(P):
     results = []
@@ -33,9 +30,7 @@ print("\nMethods actually computed:")
 for res in results:
     print(res["method"])
 
-# ============================================================
 # Extra plots: comparison of FBS relaxation parameters
-# ============================================================
 
 import os
 
@@ -274,7 +269,7 @@ def plot_fbs_theta_summary_table(P, results):
     df_theta = pd.DataFrame(rows)
     df_theta = df_theta.sort_values("theta", ascending=False)
 
-    print("\n==================== FBS THETA COMPARISON ====================")
+    print("FBS THETA COMPARISON")
     print(df_theta.to_string(index=False))
 
     df_theta.to_csv("fbs_theta_comparison_summary.csv", index=False)
