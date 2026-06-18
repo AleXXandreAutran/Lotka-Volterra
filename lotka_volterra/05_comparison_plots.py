@@ -4,9 +4,8 @@ import matplotlib.pyplot as plt
 
 from optimal_control_core import projected_gradient_residual
 
-# ============================================================
+
 # 13. Comparative plots -- improved version
-# ============================================================
 
 FIGDIR = "figures_comparison"
 os.makedirs(FIGDIR, exist_ok=True)
