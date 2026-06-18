@@ -8,9 +8,7 @@ from scipy.sparse.linalg import splu
 from scipy.optimize import minimize
 
 
-# ============================================================
 # 1. Parameters
-# ============================================================
 
 class Params:
     def __init__(self):
@@ -60,9 +58,7 @@ class Params:
 P = Params()
 
 
-# ============================================================
 # 2. Mesh and discrete operators
-# ============================================================
 
 def build_mesh(P):
     x = np.linspace(0.0, P.Lx, P.M)
@@ -120,9 +116,8 @@ LU1T = splu(A1.T)
 LU2T = splu(A2.T)
 
 
-# ============================================================
+
 # 3. Initial data and targets
-# ============================================================
 
 def initial_conditions(P, x):
     """
@@ -160,9 +155,8 @@ v10, v20 = initial_conditions(P, x)
 v1_tar, v2_tar = target_profiles(P, x, tgrid)
 
 
-# ============================================================
+
 # 4. Projection and cost functional
-# ============================================================
 
 def project_control(u, P):
     return np.minimum(P.Umax, np.maximum(0.0, u))
@@ -192,9 +186,8 @@ def compute_cost(P, u, v1, v2, v1_tar, v2_tar, dx, dt):
     return dt * dx * np.sum(integrand)
 
 
-# ============================================================
+
 # 5. State solver
-# ============================================================
 
 def solve_state(P, u):
     """
@@ -222,9 +215,8 @@ def solve_state(P, u):
     return v1, v2
 
 
-# ============================================================
+
 # 6. Discrete adjoint solver
-# ============================================================
 
 def solve_adjoint(P, u, v1, v2, v1_tar, v2_tar):
     """
@@ -268,9 +260,8 @@ def solve_adjoint(P, u, v1, v2, v1_tar, v2_tar):
     return p1, p2
 
 
-# ============================================================
+
 # 7. Reduced objective and gradient
-# ============================================================
 
 def reduced_cost_and_gradient(P, u, return_state=False):
     """
@@ -314,9 +305,8 @@ def projected_gradient_residual(P, u, grad):
     return np.linalg.norm(R.ravel(), ord=np.inf)
 
 
-# ============================================================
+
 # 8. Method 1: Forward--Backward Sweep
-# ============================================================
 
 def run_forward_backward_sweep(P, theta=None):
     if theta is None:
@@ -374,9 +364,8 @@ def run_forward_backward_sweep(P, theta=None):
     return result
 
 
-# ============================================================
+
 # 9. Method 2: Projected Gradient with Armijo
-# ============================================================
 
 def run_projected_gradient_armijo(P):
     start = time.time()
@@ -461,9 +450,8 @@ def run_projected_gradient_armijo(P):
     return result
 
 
-# ============================================================
+
 # 10. Method 3: L-BFGS-B
-# ============================================================
 
 def run_lbfgsb(P):
     start = time.time()
