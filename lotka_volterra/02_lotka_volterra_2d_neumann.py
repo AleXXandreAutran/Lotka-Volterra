@@ -8,9 +8,7 @@ from matplotlib.animation import FuncAnimation, FFMpegWriter
 import os
 
 
-# ============================================================
 # Parameters of the model
-# ============================================================
 
 a = 0.6
 b = 1.2
@@ -21,9 +19,7 @@ nu_u = 8e-5   # diffusion coefficient for the prey u = v_2
 nu_v = 5e-5   # diffusion coefficient for the predators v = v_1
 
 
-# ============================================================
 # Spatial discretization
-# ============================================================
 
 Lx, Ly = 1.0, 1.0
 Nx, Ny = 80, 80
@@ -37,9 +33,8 @@ hy = y[1] - y[0]
 X, Y = np.meshgrid(x, y, indexing="ij")
 
 
-# ============================================================
+
 # Time discretization
-# ============================================================
 
 T = 4.0
 dt = 5e-4
@@ -59,9 +54,7 @@ if max(stability_u, stability_v) > 0.5:
     print("Warning: the explicit diffusion stability condition may not be satisfied.")
 
 
-# ============================================================
 # Initial conditions: 2D Gaussian functions
-# ============================================================
 
 def gauss2d(X, Y, x0, y0, sx, sy, A):
     return A * np.exp(
@@ -96,9 +89,7 @@ v = gauss2d(X, Y, 0.35, 0.42, 0.12, 0.10, 1.3) + 0.02
 # )
 
 
-# ============================================================
 # 2D Laplacian with homogeneous Neumann boundary conditions
-# ============================================================
 # Ghost-point treatment:
 # W_{-1,j} = W_{1,j}, W_{Nx,j} = W_{Nx-2,j},
 # W_{i,-1} = W_{i,1}, W_{i,Ny} = W_{i,Ny-2}.
@@ -118,9 +109,7 @@ def laplacian2d_neumann(W, hx, hy):
     return lap
 
 
-# ============================================================
 # Simulation with explicit Euler time discretization
-# ============================================================
 
 U_hist = [u.copy()]
 V_hist = [v.copy()]
@@ -149,17 +138,15 @@ t_hist = np.array(t_hist)
 print("Number of frames:", len(t_hist))
 
 
-# ============================================================
+
 # Output directory
-# ============================================================
 
 output_dir = os.path.expanduser("~/Desktop")
 os.makedirs(output_dir, exist_ok=True)
 
 
-# ============================================================
+
 # Static final figure
-# ============================================================
 
 zmax = 1.1 * max(U_hist.max(), V_hist.max())
 
@@ -211,9 +198,8 @@ print(static_filename)
 plt.show()
 
 
-# ============================================================
+
 # 3D animation with rotation
-# ============================================================
 
 fig_anim = plt.figure(figsize=(14, 6))
 fig_anim.subplots_adjust(top=0.88, wspace=0.25)
@@ -279,9 +265,7 @@ ani = FuncAnimation(
 )
 
 
-# ============================================================
 # Save animation
-# ============================================================
 
 animation_filename = os.path.join(output_dir, "Lotka_volterra_2D_Neumann_rotation.mp4")
 
