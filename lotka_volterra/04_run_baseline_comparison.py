@@ -53,7 +53,7 @@ def summarize_results(P, results):
 
 summary = summarize_results(P, results)
 
-print("\n==================== COMPARISON TABLE ====================")
+print("\nCOMPARISON TABLE")
 print(summary.to_string(index=False))
 
 summary.to_csv("comparison_summary.csv", index=False)
@@ -87,7 +87,7 @@ def activity_statistics(P, results):
 
 activity = activity_statistics(P, results)
 
-print("\n==================== ACTIVITY TABLE ====================")
+print("\nACTIVITY TABLE")
 print(activity.to_string(index=False))
 
 activity.to_csv("activity_summary.csv", index=False)
