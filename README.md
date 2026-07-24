@@ -20,21 +20,6 @@ The scripts require Python 3 and the following packages:
 pip install numpy scipy pandas matplotlib
 ````
 
-## Repository structure
-
-```text
-lotka_volterra/
-│
-├── 01_lotka_volterra_1d.py
-├── 02_lotka_volterra_2d_neumann.py
-├── 03_lotka_volterra_2d_dirichlet.py
-├── 04_run_baseline_comparison.py
-├── 06_fbs_theta_comparison.py
-├── 07_constant_control_regimes.py
-├── 08_nonconstant_stationary_profile.py
-└── optimal_control_core.py
-```
-
 The file `optimal_control_core.py` contains the common routines used for the optimal control benchmark, including the state solver, the discrete adjoint solver, the cost functional, the reduced gradient, and the optimization methods.
 
 ## Basic simulations
