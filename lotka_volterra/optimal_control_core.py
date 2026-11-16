@@ -100,23 +100,6 @@ def build_neumann_laplacian(P, dx):
     return L
 
 
-x, tgrid, dx, dt = build_mesh(P)
-Lh = build_neumann_laplacian(P, dx)
-
-Ih = eye(P.M, format="csc")
-A1 = csc_matrix(Ih - dt * P.mu1 * Lh)
-A2 = csc_matrix(Ih - dt * P.mu2 * Lh)
-
-LU1 = splu(A1)
-LU2 = splu(A2)
-
-# Since Lh is symmetric, A_i^T = A_i.
-# But we keep separate notation for clarity.
-LU1T = splu(A1.T)
-LU2T = splu(A2.T)
-
-
-
 # 3. Initial data and targets
 
 def initial_conditions(P, x):
@@ -151,8 +134,40 @@ def target_profiles(P, x, tgrid):
     return v1_tar, v2_tar
 
 
-v10, v20 = initial_conditions(P, x)
-v1_tar, v2_tar = target_profiles(P, x, tgrid)
+_problem_key = None
+
+
+def initialize_problem(P):
+    global _problem_key, x, tgrid, dx, dt, Lh, Ih, A1, A2
+    global LU1, LU2, LU1T, LU2T, v10, v20, v1_tar, v2_tar
+
+    key = (
+        P.M, P.N, P.T, P.Lx, P.mu1, P.mu2,
+        P.m, P.alpha, P.r, P.beta,
+    )
+
+    if key == _problem_key:
+        return
+
+    x, tgrid, dx, dt = build_mesh(P)
+    Lh = build_neumann_laplacian(P, dx)
+    Ih = eye(P.M, format="csc")
+
+    A1 = csc_matrix(Ih - dt * P.mu1 * Lh)
+    A2 = csc_matrix(Ih - dt * P.mu2 * Lh)
+
+    LU1 = splu(A1)
+    LU2 = splu(A2)
+    LU1T = splu(A1.T.tocsc())
+    LU2T = splu(A2.T.tocsc())
+
+    v10, v20 = initial_conditions(P, x)
+    v1_tar, v2_tar = target_profiles(P, x, tgrid)
+
+    _problem_key = key
+
+
+initialize_problem(P)
 
 
 
@@ -418,8 +433,7 @@ def run_projected_gradient_armijo(P):
             rho *= P.armijo_sigma
 
         if not accepted:
-            # If no Armijo step is found, take the smallest trial step.
-            u_trial = project_control(u - rho * grad.reshape(P.N, P.M), P)
+            raise RuntimeError("Armijo line search failed.")
 
         control_change = np.linalg.norm((u_trial - u).ravel(), ord=np.inf)
 
