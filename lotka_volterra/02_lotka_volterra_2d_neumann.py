@@ -120,7 +120,7 @@ for n in range(Nt):
     Lv = laplacian2d_neumann(v, hx, hy)
 
     u_new = u + dt * (u * (b - v) + nu_u * Lu)
-    v_new = v + dt * (v * (u - a) + nu_v * Lv)
+    v_new = v + dt * (v * (u_new - a) + nu_v * Lv)
 
     # Positivity projection
     u = np.maximum(u_new, 0.0)
