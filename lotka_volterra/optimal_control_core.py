@@ -61,8 +61,8 @@ P = Params()
 # 2. Mesh and discrete operators
 
 def build_mesh(P):
-    x = np.linspace(0.0, P.Lx, P.M)
-    dx = x[1] - x[0]
+    dx = P.Lx / P.M
+    x = (np.arange(P.M) + 0.5) * dx
     dt = P.T / P.N
     t = np.linspace(0.0, P.T, P.N + 1)
     return x, t, dx, dt
