@@ -68,8 +68,8 @@ for n in range(Nt):
     )
 
     v_new[1:-1] = v[1:-1] + dt * (
-        v[1:-1] * (u[1:-1] - a) + nu2 * Lv[1:-1]
-    )
+    v[1:-1] * (u_new[1:-1] - a) + nu2 * Lv[1:-1]
+)
 
     # Positivity projection
     u_new = np.maximum(u_new, 0.0)
