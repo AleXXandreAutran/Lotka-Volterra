@@ -211,6 +211,7 @@ def solve_state(P, u):
     A1 v1_{n+1} = v1_n + dt v1_n(-m + alpha v2_n)
     A2 v2_{n+1} = v2_n + dt [v2_n(r - beta v1_n) - q u_n v2_n]
     """
+    initialize_problem(P)
     v1 = np.zeros((P.N + 1, P.M))
     v2 = np.zeros((P.N + 1, P.M))
 
@@ -248,6 +249,7 @@ def solve_adjoint(P, u, v1, v2, v1_tar, v2_tar):
               + alpha v1_n p1_{n+1}
               + (r - beta v1_n - q u_n) p2_{n+1} ]
     """
+    initialize_problem(P)
     p1 = np.zeros((P.N + 1, P.M))
     p2 = np.zeros((P.N + 1, P.M))
 
@@ -288,6 +290,7 @@ def reduced_cost_and_gradient(P, u, return_state=False):
     The dx*dt factor is included in the gradient so that it is the Euclidean gradient
     associated with the flattened vector.
     """
+    initialize_problem(P)
     u = project_control(u.reshape(P.N, P.M), P)
 
     v1, v2 = solve_state(P, u)
