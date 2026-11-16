@@ -297,4 +297,5 @@ def make_fbs_theta_plots(P, results, x, tgrid):
     return df_theta
 
 
+x, tgrid, dx, dt = build_mesh(P)
 df_theta = make_fbs_theta_plots(P, results, x, tgrid)
