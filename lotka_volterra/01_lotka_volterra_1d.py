@@ -87,7 +87,7 @@ for n in range(Nt):
     if n % save_every == 0:
         U_hist.append(u.copy())
         V_hist.append(v.copy())
-        t_hist.append(n * dt)
+        t_hist.append((n + 1) * dt)
 
 U_hist = np.array(U_hist)
 V_hist = np.array(V_hist)
