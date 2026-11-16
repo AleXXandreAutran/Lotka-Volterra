@@ -51,9 +51,9 @@ def laplacian_dirichlet(w):
     return lap
 
 # Simulation
-U_hist = []
-V_hist = []
-t_hist = []
+U_hist = [u.copy()]
+V_hist = [v.copy()]
+t_hist = [0.0]
 
 for n in range(Nt):
     Lu = laplacian_dirichlet(u)
@@ -84,7 +84,7 @@ for n in range(Nt):
     u = u_new
     v = v_new
 
-    if n % save_every == 0:
+    if (n + 1) % save_every == 0 or n + 1 == Nt:
         U_hist.append(u.copy())
         V_hist.append(v.copy())
         t_hist.append((n + 1) * dt)
